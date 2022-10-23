@@ -1,18 +1,22 @@
 package endpoints;
 
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import testbase.testbase;
+import testbase.testBase;
 import java.util.HashMap;
 import static io.restassured.RestAssured.*;
 
 public class EndPoints {
-    RequestSpecification spec = (new testbase()).RequestSpec();
+    Response response;
+    RequestSpecification requestSpecificationspec = (new testBase()).RequestSpec();
+    ResponseSpecification responseSpecification = (new testBase()).ResponseSpec();
 
-    public void Auth (String path, HashMap payload){
+    public Response Auth (String path, HashMap payload){
 
-         given(spec)
+         response = given(requestSpecificationspec)
                 .contentType("application/json")
+                .body(payload)
         .when()
                 .body(payload)
                 .post(path)
@@ -20,5 +24,6 @@ public class EndPoints {
                  .log().all()
                  .extract()
                  .response();
+         return response;
     }
 }
