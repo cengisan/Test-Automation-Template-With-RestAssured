@@ -1,14 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
 <suite name = "Suite">
     <listeners >
-        <listener class-name = "reports.extentReporter"/>
+        <listener class-name = "reports.ExtentReporter"/>
     </listeners>
 
     <test name="RestAssured-Template-Test">
         <classes>
-            <class name="testclasses.test"/>
+            <class name="testclasses.TestCases"/>
         </classes>
-    </test>
+    </test><!-- Test -->
 
 </suite>
