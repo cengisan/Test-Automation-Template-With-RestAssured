@@ -46,7 +46,7 @@ public class ExtentReporter implements IReporter {
                 test = extent.startTest(result.getMethod().getMethodName());
                 for (String group : result.getMethod().getGroups())
                     test.assignCategory(group);
-                String message = "TestCases " + status.toString().toLowerCase() + "ed";
+                String message = "BookerTestCases " + status.toString().toLowerCase() + "ed";
                 if (result.getThrowable() != null) message = result.getThrowable().getMessage();
                 test.log(status, message);
                 extent.endTest(test);

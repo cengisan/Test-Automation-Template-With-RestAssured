@@ -1,13 +1,13 @@
 package testclasses;
 
 import assertion.Assertions;
-import endpoints.BookerEndPoints;
+import endpoints.Endpoints;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
 
-public class TestCases implements BookerEndPoints {
+public class BookerTestCases implements Endpoints {
     Assertions assertions = new Assertions();
     Integer bookingId;
     String token;
@@ -19,27 +19,19 @@ public class TestCases implements BookerEndPoints {
         payload.put("username", "admin");
         payload.put("password", "password123");
 
-        Response response = post("auth", payload);
+        Response response = bookerPost("auth", payload);
         token = response.jsonPath().get("token");
         assertions.Status200Assertion(response);
     }
 
     @Test(priority = 2)
     public void GetBookingIds_Test() {
-        Response response = get("booking");
+        Response response = bookerGet("booking");
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }
 
     @Test(priority = 3)
-    public void GetBooking_Test() {
-
-        Response response = get("booking/11962");
-        assertions.Status200Assertion(response);
-        assertions.NotNullAssertion(response);
-    }
-
-    @Test(priority = 4)
     public void CreateBooking_Test() {
         HashMap<String, String> bookingdates = new HashMap<>();
         bookingdates.put("checkin", "2018-01-01");
@@ -53,8 +45,15 @@ public class TestCases implements BookerEndPoints {
         payload.put("bookingdates", bookingdates);
         payload.put("additionalneeds", "Breakfast");
 
-        Response response = post("booking", payload);
+        Response response = bookerPost("booking", payload);
         bookingId = response.jsonPath().get("bookingid");
+        assertions.Status200Assertion(response);
+        assertions.NotNullAssertion(response);
+    }
+    @Test(priority = 4)
+    public void GetBooking_Test() {
+
+        Response response = bookerGet("booking/" + bookingId);
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }
@@ -73,7 +72,7 @@ public class TestCases implements BookerEndPoints {
         payload.put("bookingdates", bookingdates);
         payload.put("additionalneeds", "Breakfast");
 
-        Response response = put("booking/" + bookingId, payload, token);
+        Response response = bookerPut("booking/" + bookingId, payload, token);
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }
@@ -85,7 +84,7 @@ public class TestCases implements BookerEndPoints {
         payload.put("firstname", "James");
         payload.put("lastname", "Brown");
 
-        Response response = patch("booking/" + bookingId, payload, token);
+        Response response = bookerPatch("booking/" + bookingId, payload, token);
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }
@@ -93,7 +92,7 @@ public class TestCases implements BookerEndPoints {
     @Test(priority = 7)
     public void DeleteBooking_Test() {
 
-        Response response = delete("booking/" + bookingId, token);
+        Response response = bookerDelete("booking/" + bookingId, token);
         assertions.Status201Assertion(response);
         assertions.CreatedAssertion(response);
     }
@@ -101,7 +100,7 @@ public class TestCases implements BookerEndPoints {
     @Test(priority = 8)
     public void HealthCheck_Test() {
 
-        Response response = get("ping");
+        Response response = bookerGet("ping");
         assertions.Status201Assertion(response);
     }
 }

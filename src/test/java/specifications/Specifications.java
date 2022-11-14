@@ -11,15 +11,28 @@ import util.properties.GetProperties;
 import java.util.Properties;
 
 public class Specifications {
-    public RequestSpecification RequestSpec(){
+    public RequestSpecification BookerRequestSpec(){
         GetProperties getProp = new GetProperties();
         Properties prop = getProp.properties_reader(SpecEnum.FILEPATH.getSpecInfos());
         return new RequestSpecBuilder().
-                setBaseUri(prop.getProperty(SpecEnum.URL.getSpecInfos())).
+                setBaseUri(prop.getProperty(SpecEnum.BOOKERURL.getSpecInfos())).
                 log(LogDetail.ALL).
                 build();
     }
-    public ResponseSpecification ResponseSpec(){
+    public ResponseSpecification BookerResponseSpec(){
+        return new ResponseSpecBuilder().
+                log(LogDetail.ALL).
+                build();
+    }
+    public RequestSpecification ReqresRequestSpec(){
+        GetProperties getProp = new GetProperties();
+        Properties prop = getProp.properties_reader(SpecEnum.FILEPATH.getSpecInfos());
+        return new RequestSpecBuilder().
+                setBaseUri(prop.getProperty(SpecEnum.REQRESURL.getSpecInfos())).
+                log(LogDetail.ALL).
+                build();
+    }
+    public ResponseSpecification ReqresResponseSpec(){
         return new ResponseSpecBuilder().
                 log(LogDetail.ALL).
                 build();
