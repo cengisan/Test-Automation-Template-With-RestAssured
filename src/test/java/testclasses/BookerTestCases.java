@@ -84,7 +84,7 @@ public class BookerTestCases implements Endpoints {
         payload.put("firstname", "James");
         payload.put("lastname", "Brown");
 
-        Response response = bookerPatch("booking/" + bookingId, payload, token);
+        Response response = bookerPatch("booking/" + bookingId, payload, token + "2");
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }

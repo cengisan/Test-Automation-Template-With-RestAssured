@@ -3,7 +3,7 @@
 
 <suite name = "Suite">
     <listeners >
-        <listener class-name = "reports.ExtentReporter"/>
+        <listener class-name = "reports.ExtentReporterListener"/>
     </listeners>
 
     <test name="RestAssured-Template-Test">

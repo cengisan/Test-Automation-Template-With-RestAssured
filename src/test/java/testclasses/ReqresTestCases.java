@@ -81,7 +81,7 @@ public class ReqresTestCases implements Endpoints {
 
     @Test(priority = 10)
     public void Single_Resource_Not_Found_Test() {
-        Response response = reqresGet("unknown/23");
+        Response response = reqresGet("unknown/2");
         assertions.Status404Assertion(response);
     }
 
