@@ -6,23 +6,30 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
+import org.apache.commons.io.output.WriterOutputStream;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.io.*;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Scanner;
 
 public class ExtentReporterListener implements ITestListener {
 
+    public static StringWriter writer;
+    public static PrintStream captor;
     static Date date = new Date();
     static String fileName = "Extent_" + date.toString().replace(":","_") + ".html";
 
     private static ExtentReports extentReports = ExtentReporterManager.createInstance(System.getProperty("user.dir")+"\\test-output\\"+fileName);
-    public static ThreadLocal<ExtentTest> testReport = new ThreadLocal<ExtentTest>();
+    public static ThreadLocal<ExtentTest> testReport = new ThreadLocal<>();
 
     public void onTestStart(ITestResult result){
         ExtentTest test = extentReports.createTest(result.getTestClass().getName()+ "@TestCase : " + result.getMethod().getMethodName());
+        writer = new StringWriter();
+        captor = new PrintStream(new WriterOutputStream(writer),true);
         testReport.set(test);
     }
     public void onTestSuccess(ITestResult result){
@@ -55,9 +62,18 @@ public class ExtentReporterListener implements ITestListener {
             extentReports.flush();
         }
     }
-
-
-
-
+    public void logInfo(String detail){
+        testReport.get().info(detail);
+    }
+    public void requestAndResponseReporter(String request, String response){
+        logInfo("---- REQUEST ----");
+        apiAndLogFormatInReport(request);
+        logInfo("---- RESPONSE ----");
+        apiAndLogFormatInReport(response);
+    }
+    public void apiAndLogFormatInReport(String content){
+        String prettyPrint = content.replace("\n","<br>");
+        logInfo("<pre>" + prettyPrint + "</pre>");
+    }
 
 }
