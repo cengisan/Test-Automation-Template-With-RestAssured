@@ -10,6 +10,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <rest.version>5.2.0</rest.version>
+        <extent.version>4.0.6</extent.version>
 
     </properties>
     <name>Archetype - RestAssured-Template</name>
@@ -35,7 +36,7 @@
         <dependency>
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
-            <version>4.0.6</version>
+            <version>${extent.version}</version>
         </dependency>
 
         <dependency>
