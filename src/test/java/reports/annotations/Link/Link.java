@@ -1,5 +1,7 @@
-package reports.Link;
+package reports.annotations.Link;
 
+
+import reports.annotations.Links.Links;
 
 import java.lang.annotation.*;
 @Documented

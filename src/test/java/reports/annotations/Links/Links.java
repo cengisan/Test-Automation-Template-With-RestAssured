@@ -1,4 +1,6 @@
-package reports.Link;
+package reports.annotations.Links;
+
+import reports.annotations.Link.Link;
 
 import java.lang.annotation.*;
 
@@ -8,6 +10,6 @@ import java.lang.annotation.*;
 @Target({ElementType.METHOD, ElementType.TYPE})
 public @interface Links {
 
-    Link [] value();
+    Link[] value();
 
 }

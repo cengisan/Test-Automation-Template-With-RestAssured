@@ -4,7 +4,7 @@ import assertion.Assertions;
 import endpoints.Endpoints;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
-import reports.Link.Link;
+import reports.annotations.Link.Link;
 
 import java.util.HashMap;
 
