@@ -6,7 +6,6 @@ import io.restassured.response.Response;
 import reports.ExtentReporterListener;
 import specifications.Specifications;
 
-import java.io.StringWriter;
 import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
@@ -19,7 +18,7 @@ public interface ReqresEndPoints {
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
-                .filter(new RequestLoggingFilter(detail.captor))
+                .filter(new RequestLoggingFilter(ExtentReporterListener.captor))
                 .contentType(ContentType.JSON)
                 .when()
                 .body(payload)
@@ -28,7 +27,7 @@ public interface ReqresEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(detail.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(ExtentReporterListener.writer.toString(), response.prettyPrint());
         return response;
     }
     default Response reqresGet(String path) {
@@ -37,7 +36,7 @@ public interface ReqresEndPoints {
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
-                .filter(new RequestLoggingFilter(detail.captor))
+                .filter(new RequestLoggingFilter(ExtentReporterListener.captor))
                 .contentType(ContentType.JSON)
                 .when()
                 .get(path)
@@ -45,7 +44,7 @@ public interface ReqresEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(detail.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(ExtentReporterListener.writer.toString(), response.prettyPrint());
         return response;
     }
 
@@ -55,7 +54,7 @@ public interface ReqresEndPoints {
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
-                .filter(new RequestLoggingFilter(detail.captor))
+                .filter(new RequestLoggingFilter(ExtentReporterListener.captor))
                 .contentType(ContentType.JSON)
                 .when()
                 .param(param, id)
@@ -64,7 +63,7 @@ public interface ReqresEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(detail.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(ExtentReporterListener.writer.toString(), response.prettyPrint());
         return response;
     }
 
@@ -74,7 +73,7 @@ public interface ReqresEndPoints {
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
-                .filter(new RequestLoggingFilter(detail.captor))
+                .filter(new RequestLoggingFilter(ExtentReporterListener.captor))
                 .contentType(ContentType.JSON)
                 .when()
                 .body(payload)
@@ -82,7 +81,7 @@ public interface ReqresEndPoints {
                 .then().spec(specifications.ReqresResponseSpec())
                 .extract()
                 .response();
-        detail.requestAndResponseReporter(detail.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(ExtentReporterListener.writer.toString(), response.prettyPrint());
         return response;
     }
     default Response reqresPatch(String path, HashMap payload) {
@@ -91,7 +90,7 @@ public interface ReqresEndPoints {
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
-                .filter(new RequestLoggingFilter(detail.captor))
+                .filter(new RequestLoggingFilter(ExtentReporterListener.captor))
                 .contentType(ContentType.JSON)
                 .when()
                 .body(payload)
@@ -100,7 +99,7 @@ public interface ReqresEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(detail.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(ExtentReporterListener.writer.toString(), response.prettyPrint());
         return response;
     }
     default Response reqresDelete(String path) {
@@ -109,7 +108,7 @@ public interface ReqresEndPoints {
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
-                .filter(new RequestLoggingFilter(detail.captor))
+                .filter(new RequestLoggingFilter(ExtentReporterListener.captor))
                 .contentType(ContentType.JSON)
                 .when()
                 .delete(path)
@@ -117,7 +116,7 @@ public interface ReqresEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(detail.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(ExtentReporterListener.writer.toString(), response.prettyPrint());
         return response;
     }
 }

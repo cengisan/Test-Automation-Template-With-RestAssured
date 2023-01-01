@@ -10,11 +10,12 @@ import org.apache.commons.io.output.WriterOutputStream;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import reports.Link.Link;
 
 import java.io.*;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Scanner;
 
 public class ExtentReporterListener implements ITestListener {
 
@@ -23,7 +24,7 @@ public class ExtentReporterListener implements ITestListener {
     static Date date = new Date();
     static String fileName = "Extent_" + date.toString().replace(":","_") + ".html";
 
-    private static ExtentReports extentReports = ExtentReporterManager.createInstance(System.getProperty("user.dir")+"\\test-output\\"+fileName);
+    private static final ExtentReports extentReports = ExtentReporterManager.createInstance(System.getProperty("user.dir")+"\\test-output\\"+fileName);
     public static ThreadLocal<ExtentTest> testReport = new ThreadLocal<>();
 
     public void onTestStart(ITestResult result){
@@ -33,12 +34,19 @@ public class ExtentReporterListener implements ITestListener {
         testReport.set(test);
     }
     public void onTestSuccess(ITestResult result){
+
+        Markup test = MarkupHelper.createLabel(testLink(result), ExtentColor.TRANSPARENT);
+        testReport.get().pass(test);
+
         String methodName = result.getMethod().getMethodName();
         String logText = "<b>" + "TEST CASE: - " + methodName.toUpperCase() + " PASSED" + "</b>";
         Markup m = MarkupHelper.createLabel(logText, ExtentColor.GREEN);
         testReport.get().pass(m);
     }
     public void onTestFailure(ITestResult result){
+        Markup test = MarkupHelper.createLabel(testLink(result), ExtentColor.TRANSPARENT);
+        testReport.get().log(Status.FAIL, test);
+
         String exceptionMessage = Arrays.toString(result.getThrowable().getStackTrace());
         testReport.get().fail("<details>" + "<summary>" + "<b>" + "<font color=" + "red>" +
                 "Exception Occured: Click to see" + "</font>" + "</b>" + "</summary>" +
@@ -49,6 +57,9 @@ public class ExtentReporterListener implements ITestListener {
         testReport.get().log(Status.FAIL, m);
     }
     public void onTestSkipped(ITestResult result){
+        Markup test = MarkupHelper.createLabel(testLink(result), ExtentColor.TRANSPARENT);
+        testReport.get().skip(test);
+
         String methodName = result.getMethod().getMethodName();
         String logText = "<b>" + "TEST CASE: - " + methodName.toUpperCase() + " SKIPPED" + "</b>";
         Markup m = MarkupHelper.createLabel(logText, ExtentColor.YELLOW);
@@ -74,6 +85,26 @@ public class ExtentReporterListener implements ITestListener {
     public void apiAndLogFormatInReport(String content){
         String prettyPrint = content.replace("\n","<br>");
         logInfo("<pre>" + prettyPrint + "</pre>");
+    }
+
+    public String testLink(ITestResult result){
+        String testInfo;
+        try{
+            Class<?> clazz = Class.forName(result.getInstanceName());
+            Method method = clazz.getMethod(result.getMethod().getMethodName());
+            Link link = method.getAnnotation(Link.class);
+            if (link == null){
+                testInfo = "<b>TestCase link was not added!</b>";
+            }
+            else {
+                String name = link.name();
+                String url = link.url();
+                testInfo = "<b>TestCase Link: <a href=\"" + url + "\" target=\"_blank\" rel=\"noopener noreferrer\">" + name + "</a></b>";
+            }
+        } catch (NoSuchMethodException | ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+        return testInfo;
     }
 
 }

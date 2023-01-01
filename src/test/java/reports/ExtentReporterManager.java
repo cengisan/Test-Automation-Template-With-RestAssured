@@ -8,8 +8,6 @@ import org.testng.annotations.BeforeTest;
 
 public class ExtentReporterManager implements ITestNGListener {
 
-    private static ExtentReports extentReports;
-
     @BeforeTest
     public static ExtentReports createInstance(String fileName) {
         ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(fileName);
@@ -18,8 +16,9 @@ public class ExtentReporterManager implements ITestNGListener {
         htmlReporter.config().setDocumentTitle(fileName);
         htmlReporter.config().setReportName(fileName);
         htmlReporter.config().setTheme(Theme.DARK);
+        htmlReporter.config().setDocumentTitle("Test Report");
 
-        extentReports = new ExtentReports();
+        ExtentReports extentReports = new ExtentReports();
         extentReports.attachReporter(htmlReporter);
 
         extentReports.setSystemInfo("Automation Test Engineer", "Cengizhan Uzuner");
