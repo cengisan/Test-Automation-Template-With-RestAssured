@@ -28,7 +28,7 @@ public class ExtentReporterListener implements ITestListener {
     public static ThreadLocal<ExtentTest> testReport = new ThreadLocal<>();
 
     public void onTestStart(ITestResult result){
-        ExtentTest test = extentReports.createTest(result.getTestClass().getName()+ "@TestCase : " + result.getMethod().getMethodName());
+        ExtentTest test = extentReports.createTest("TestCase : " + result.getMethod().getMethodName());
         writer = new StringWriter();
         captor = new PrintStream(new WriterOutputStream(writer),true);
         testReport.set(test);
