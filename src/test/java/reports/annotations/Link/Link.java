@@ -11,10 +11,7 @@ import java.lang.annotation.*;
 @Repeatable(Links.class)
 public @interface Link {
 
-    String value() default "";
-
     String name() default "Test Link";
-
     String url() default "";
 
 }
