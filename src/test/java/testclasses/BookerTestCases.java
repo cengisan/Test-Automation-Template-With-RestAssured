@@ -12,7 +12,9 @@ public class BookerTestCases implements Endpoints {
     Assertions assertions = new Assertions();
     Integer bookingId;
     String token;
-    @Link(name = "AUTH",url = "https://restful-booker.herokuapp.com/apidoc/index.html")
+
+    @Link(name = "AUTH", url = "https://restful-booker.herokuapp.com/apidoc/index.html")
+    @Link(name = "AUTH2", url = "https://restful-booker.herokuapp.com/apidoc")
     @Test(priority = 1)
     public void Auth_test() {
 
@@ -24,14 +26,16 @@ public class BookerTestCases implements Endpoints {
         token = response.jsonPath().get("token");
         assertions.Status200Assertion(response);
     }
-    @Link(name = "GET BOOKING IDS",url = "https://restful-booker.herokuapp.com/apidoc/index.html")
+
+    @Link(name = "GET BOOKING IDS", url = "https://restful-booker.herokuapp.com/apidoc/index.html")
     @Test(priority = 2)
     public void GetBookingIds_Test() {
         Response response = bookerGet("booking");
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }
-    @Link(name = "CREATE BOOKING",url = "https://restful-booker.herokuapp.com/apidoc/index.html")
+
+    @Link(name = "CREATE BOOKING", url = "https://restful-booker.herokuapp.com/apidoc/index.html")
     @Test(priority = 3)
     public void CreateBooking_Test() {
         HashMap<String, String> bookingdates = new HashMap<>();
@@ -51,7 +55,8 @@ public class BookerTestCases implements Endpoints {
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }
-    @Link(name = "GET BOOKING",url = "https://restful-booker.herokuapp.com/apidoc/index.html")
+
+    @Link(name = "GET BOOKING", url = "https://restful-booker.herokuapp.com/apidoc/index.html")
     @Test(priority = 4)
     public void GetBooking_Test() {
 
@@ -59,7 +64,8 @@ public class BookerTestCases implements Endpoints {
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }
-    @Link(name = "UPDATE BOOKING",url = "https://restful-booker.herokuapp.com/apidoc/index.html")
+
+    @Link(name = "UPDATE BOOKING", url = "https://restful-booker.herokuapp.com/apidoc/index.html")
     @Test(priority = 5)
     public void UpdateBooking_Test() {
         HashMap<String, String> bookingdates = new HashMap<>();
@@ -78,7 +84,8 @@ public class BookerTestCases implements Endpoints {
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }
-    @Link(name = "PARTIAL UPDATE BOOKING",url = "https://restful-booker.herokuapp.com/apidoc/index.html")
+
+    @Link(name = "PARTIAL UPDATE BOOKING", url = "https://restful-booker.herokuapp.com/apidoc/index.html")
     @Test(priority = 6)
     public void PartialUpdateBooking_Test() {
 
@@ -90,7 +97,8 @@ public class BookerTestCases implements Endpoints {
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }
-    @Link(name = "DELETE BOOKING",url = "https://restful-booker.herokuapp.com/apidoc/index.html")
+
+    @Link(name = "DELETE BOOKING", url = "https://restful-booker.herokuapp.com/apidoc/index.html")
     @Test(priority = 7)
     public void DeleteBooking_Test() {
 
@@ -98,7 +106,7 @@ public class BookerTestCases implements Endpoints {
         assertions.Status201Assertion(response);
         assertions.CreatedAssertion(response);
     }
-    @Link(name = "HEALTH CHECK",url = "https://restful-booker.herokuapp.com/apidoc/index.html")
+
     @Test(priority = 8)
     public void HealthCheck_Test() {
 

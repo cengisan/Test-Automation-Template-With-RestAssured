@@ -21,7 +21,6 @@ public class Specifications {
     }
     public ResponseSpecification BookerResponseSpec(){
         return new ResponseSpecBuilder().
-                log(LogDetail.ALL).
                 build();
     }
     public RequestSpecification ReqresRequestSpec(){
@@ -34,7 +33,6 @@ public class Specifications {
     }
     public ResponseSpecification ReqresResponseSpec(){
         return new ResponseSpecBuilder().
-                log(LogDetail.ALL).
                 build();
     }
 }

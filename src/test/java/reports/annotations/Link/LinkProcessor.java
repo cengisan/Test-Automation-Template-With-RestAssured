@@ -2,31 +2,34 @@ package reports.annotations.Link;
 
 import org.testng.ITestResult;
 
+
 import java.lang.reflect.Method;
+import java.util.*;
+
 
 public class LinkProcessor {
-    public static String testLink(ITestResult result){
+
+    public static String testLink(ITestResult result) {
+        ArrayList<String> links = new ArrayList<>();
         String testInfo;
-        try{
+        String linksAdjustment;
+        try {
             Class<?> clazz = Class.forName(result.getInstanceName());
             Method method = clazz.getMethod(result.getMethod().getMethodName());
-            Link classLink = clazz.getAnnotation(Link.class);
-            Link methodLink = method.getAnnotation(Link.class);
+            Link[] methodLinks = method.getDeclaredAnnotationsByType(Link.class);
 
-            if (methodLink == null && classLink == null) {
-                testInfo = "<b>TestCase link was not added!</b>";
-            } else if (methodLink == null && classLink != null) {
-                String name = classLink.name();
-                String url = classLink.url();
-                testInfo = "<b>TestCase Link: <a href=\"" + url + "\" target=\"_blank\" rel=\"noopener noreferrer\">" + name + "</a></b>";
-            } else {
-                String name = methodLink.name();
-                String url = methodLink.url();
-                testInfo = "<b>TestCase Link: <a href=\"" + url + "\" target=\"_blank\" rel=\"noopener noreferrer\">" + name + "</a></b>";
+            for (Link annotation : methodLinks) {
+                String name = annotation.name();
+                String url = annotation.url();
+                System.out.println();
+                testInfo = "<a href=\"" + url + "\" target=\"_blank\" rel=\"noopener noreferrer\">" + name + "</a>";
+                links.add(testInfo);
             }
         } catch (NoSuchMethodException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-        return testInfo;
+        linksAdjustment = String.valueOf(links).replace("[", "").replace("]","");
+
+        return linksAdjustment;
     }
 }

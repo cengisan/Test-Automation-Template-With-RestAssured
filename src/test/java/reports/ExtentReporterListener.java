@@ -10,6 +10,7 @@ import org.apache.commons.io.output.WriterOutputStream;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
+import org.testng.annotations.BeforeMethod;
 
 import java.io.*;
 import java.util.Arrays;
@@ -34,8 +35,8 @@ public class ExtentReporterListener implements ITestListener {
         testReport.set(test);
     }
     public void onTestSuccess(ITestResult result){
-
-        Markup test = MarkupHelper.createLabel(testLink(result), ExtentColor.TRANSPARENT);
+        String testLinkLog = "<b>TestCase Link: " + testLink(result) + "</b>";
+        Markup test = MarkupHelper.createLabel(testLinkLog, ExtentColor.TRANSPARENT);
         testReport.get().pass(test);
 
         String methodName = result.getMethod().getMethodName();
@@ -44,7 +45,8 @@ public class ExtentReporterListener implements ITestListener {
         testReport.get().pass(m);
     }
     public void onTestFailure(ITestResult result){
-        Markup test = MarkupHelper.createLabel(testLink(result), ExtentColor.TRANSPARENT);
+        String testLinkLog = "<b>TestCase Link: " + testLink(result) + "</b>";
+        Markup test = MarkupHelper.createLabel(testLinkLog, ExtentColor.TRANSPARENT);
         testReport.get().log(Status.FAIL, test);
 
         String exceptionMessage = Arrays.toString(result.getThrowable().getStackTrace());
@@ -57,7 +59,8 @@ public class ExtentReporterListener implements ITestListener {
         testReport.get().log(Status.FAIL, m);
     }
     public void onTestSkipped(ITestResult result){
-        Markup test = MarkupHelper.createLabel(testLink(result), ExtentColor.TRANSPARENT);
+        String testLinkLog = "<b>TestCase Link: " + testLink(result) + "</b>";
+        Markup test = MarkupHelper.createLabel(testLinkLog, ExtentColor.TRANSPARENT);
         testReport.get().skip(test);
 
         String methodName = result.getMethod().getMethodName();
@@ -69,9 +72,7 @@ public class ExtentReporterListener implements ITestListener {
 
     }
     public void onFinish(ITestContext context){
-        if(extentReports != null){
-            extentReports.flush();
-        }
+        extentReports.flush();
     }
     public void logInfo(String detail){
         testReport.get().info(detail);
