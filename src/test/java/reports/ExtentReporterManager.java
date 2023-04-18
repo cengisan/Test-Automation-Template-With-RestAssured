@@ -2,6 +2,7 @@ package reports;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.ExtentLoggerReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import org.testng.annotations.BeforeTest;
 
@@ -163,6 +164,8 @@ public class ExtentReporterManager {
                 "            })();");
 
         ExtentReports extentReports = new ExtentReports();
+        ExtentLoggerReporter logger = new ExtentLoggerReporter("test-output");
+        extentReports.attachReporter(logger);
         extentReports.attachReporter(htmlReporter);
 
         extentReports.setSystemInfo("Automation Test Engineer", "Cengizhan Uzuner");

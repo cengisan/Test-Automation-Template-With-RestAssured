@@ -9,8 +9,8 @@
     <test name="RestAssured-Template-Test">
         <classes>
             <class name="testclasses.BookerTestCases"/>
-            <class name="testclasses.ReqresTestCases"></class>
+            <class name="testclasses.ReqresTestCases"/>
         </classes>
-    </test><!-- Test -->
+    </test>
 
 </suite>

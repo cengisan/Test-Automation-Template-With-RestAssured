@@ -10,7 +10,6 @@ import org.apache.commons.io.output.WriterOutputStream;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-import org.testng.annotations.BeforeMethod;
 
 import java.io.*;
 import java.util.Arrays;
@@ -20,20 +19,12 @@ import static reports.annotations.Link.LinkProcessor.testLink;
 
 public class ExtentReporterListener implements ITestListener {
 
-    public static StringWriter writer;
-    public static PrintStream captor;
     static Date date = new Date();
     static String fileName = "Extent_" + date.toString().replace(":","_") + ".html";
 
-    private static final ExtentReports extentReports = ExtentReporterManager.createInstance(System.getProperty("user.dir")+"\\test-output\\"+fileName);
+    public static final ExtentReports extentReports = ExtentReporterManager.createInstance(System.getProperty("user.dir")+"\\test-output\\"+fileName);
     public static ThreadLocal<ExtentTest> testReport = new ThreadLocal<>();
 
-    public void onTestStart(ITestResult result){
-        ExtentTest test = extentReports.createTest("TestCase : " + result.getMethod().getMethodName());
-        writer = new StringWriter();
-        captor = new PrintStream(new WriterOutputStream(writer),true);
-        testReport.set(test);
-    }
     public void onTestSuccess(ITestResult result){
         String testLinkLog = "<b>TestCase Link: " + testLink(result) + "</b>";
         Markup test = MarkupHelper.createLabel(testLinkLog, ExtentColor.TRANSPARENT);

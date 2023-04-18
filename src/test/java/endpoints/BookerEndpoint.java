@@ -6,23 +6,21 @@ import io.restassured.response.Response;
 import reports.ExtentReporterListener;
 import specifications.Specifications;
 
-import java.io.PrintStream;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.HashMap;
 
-import static io.restassured.RestAssured.*;
+import static io.restassured.RestAssured.given;
+import static util.TestBaseClass.captor;
+import static util.TestBaseClass.writer;
 
-public interface BookerEndPoints {
+public class BookerEndpoint {
 
-
-    default Response bookerPost(String path, HashMap payload) {
+    public Response Post(String path, HashMap payload) {
 
         ExtentReporterListener detail = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.BookerRequestSpec())
-                .filter(new RequestLoggingFilter(detail.captor))
+                .filter(new RequestLoggingFilter(captor))
                 .contentType(ContentType.JSON)
                 .when()
                 .body(payload)
@@ -31,15 +29,15 @@ public interface BookerEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(detail.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
-    default Response bookerGet(String path) {
+    public Response Get(String path) {
 
         ExtentReporterListener detail = new ExtentReporterListener();
         Specifications specifications = new Specifications();
         Response response = given(specifications.BookerRequestSpec())
-                .filter(new RequestLoggingFilter(detail.captor))
+                .filter(new RequestLoggingFilter(captor))
                 .contentType(ContentType.JSON)
                 .when()
                 .get(path)
@@ -47,17 +45,17 @@ public interface BookerEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(detail.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
 
-    default Response bookerPut(String path, HashMap payload, String token) {
+    public Response Put(String path, HashMap payload, String token) {
 
         ExtentReporterListener detail = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.BookerRequestSpec())
-                .filter(new RequestLoggingFilter(detail.captor))
+                .filter(new RequestLoggingFilter(captor))
                 .contentType(ContentType.JSON)
                 .header("Cookie","token="+token)
                 .when()
@@ -67,16 +65,16 @@ public interface BookerEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(detail.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
-    default Response bookerPatch(String path, HashMap payload, String token) {
+    public Response Patch(String path, HashMap payload, String token) {
 
         ExtentReporterListener detail = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.BookerRequestSpec())
-                .filter(new RequestLoggingFilter(detail.captor))
+                .filter(new RequestLoggingFilter(captor))
                 .contentType(ContentType.JSON)
                 .header("Cookie","token="+token)
                 .when()
@@ -86,16 +84,16 @@ public interface BookerEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(detail.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
-    default Response bookerDelete(String path,String token) {
+    public Response Delete(String path,String token) {
 
         ExtentReporterListener detail = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.BookerRequestSpec())
-                .filter(new RequestLoggingFilter(detail.captor))
+                .filter(new RequestLoggingFilter(captor))
                 .contentType(ContentType.JSON)
                 .header("Cookie","token="+token)
                 .when()
@@ -104,7 +102,7 @@ public interface BookerEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(detail.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
 }

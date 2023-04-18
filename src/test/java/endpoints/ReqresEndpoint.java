@@ -9,16 +9,18 @@ import specifications.Specifications;
 import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
+import static util.TestBaseClass.captor;
+import static util.TestBaseClass.writer;
 
-public interface ReqresEndPoints {
+public class ReqresEndpoint {
 
-    default Response reqresPost(String path, HashMap payload) {
+    public Response Post(String path, HashMap payload) {
 
         ExtentReporterListener detail = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
-                .filter(new RequestLoggingFilter(ExtentReporterListener.captor))
+                .filter(new RequestLoggingFilter(captor))
                 .contentType(ContentType.JSON)
                 .when()
                 .body(payload)
@@ -27,16 +29,16 @@ public interface ReqresEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(ExtentReporterListener.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
-    default Response reqresGet(String path) {
+    public Response Get(String path) {
 
         ExtentReporterListener detail = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
-                .filter(new RequestLoggingFilter(ExtentReporterListener.captor))
+                .filter(new RequestLoggingFilter(captor))
                 .contentType(ContentType.JSON)
                 .when()
                 .get(path)
@@ -44,17 +46,17 @@ public interface ReqresEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(ExtentReporterListener.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
 
-    default Response reqresGet(String path,String param, int id) {
+    public Response Get(String path,String param, int id) {
 
         ExtentReporterListener detail = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
-                .filter(new RequestLoggingFilter(ExtentReporterListener.captor))
+                .filter(new RequestLoggingFilter(captor))
                 .contentType(ContentType.JSON)
                 .when()
                 .param(param, id)
@@ -63,17 +65,17 @@ public interface ReqresEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(ExtentReporterListener.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
 
-    default Response reqresPut(String path, HashMap payload) {
+    public Response Put(String path, HashMap payload) {
 
         ExtentReporterListener detail = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
-                .filter(new RequestLoggingFilter(ExtentReporterListener.captor))
+                .filter(new RequestLoggingFilter(captor))
                 .contentType(ContentType.JSON)
                 .when()
                 .body(payload)
@@ -81,16 +83,16 @@ public interface ReqresEndPoints {
                 .then().spec(specifications.ReqresResponseSpec())
                 .extract()
                 .response();
-        detail.requestAndResponseReporter(ExtentReporterListener.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
-    default Response reqresPatch(String path, HashMap payload) {
+    public Response Patch(String path, HashMap payload) {
 
         ExtentReporterListener detail = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
-                .filter(new RequestLoggingFilter(ExtentReporterListener.captor))
+                .filter(new RequestLoggingFilter(captor))
                 .contentType(ContentType.JSON)
                 .when()
                 .body(payload)
@@ -99,16 +101,16 @@ public interface ReqresEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(ExtentReporterListener.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
-    default Response reqresDelete(String path) {
+    public Response Delete(String path) {
 
         ExtentReporterListener detail = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
-                .filter(new RequestLoggingFilter(ExtentReporterListener.captor))
+                .filter(new RequestLoggingFilter(captor))
                 .contentType(ContentType.JSON)
                 .when()
                 .delete(path)
@@ -116,7 +118,8 @@ public interface ReqresEndPoints {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(ExtentReporterListener.writer.toString(), response.prettyPrint());
+        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
+
 }
