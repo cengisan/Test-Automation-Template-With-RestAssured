@@ -1,4 +1,4 @@
-package reports;
+package reporter;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -6,16 +6,14 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import org.apache.commons.io.output.WriterOutputStream;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-import java.io.*;
 import java.util.Arrays;
 import java.util.Date;
 
-import static reports.annotations.Link.LinkProcessor.testLink;
+import static reporter.annotations.Link.LinkProcessor.testLink;
 
 public class ExtentReporterListener implements ITestListener {
 

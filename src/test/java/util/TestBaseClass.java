@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import java.io.PrintStream;
 import java.io.StringWriter;
 
-import static reports.ExtentReporterListener.*;
+import static reporter.ExtentReporterListener.*;
 
 public class TestBaseClass {
 

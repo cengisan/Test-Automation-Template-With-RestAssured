@@ -1,4 +1,4 @@
-package reports.annotations.Link;
+package reporter.annotations.Link;
 
 import org.testng.ITestResult;
 

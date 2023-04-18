@@ -3,7 +3,7 @@
 <suite name="Parallel Test Suite" thread-count="2" parallel="tests" >
 
     <listeners >
-        <listener class-name = "reports.ExtentReporterListener"/>
+        <listener class-name = "reporter.ExtentReporterListener"/>
     </listeners>
 
     <test name="Parallel Test ReqresTestCases" >

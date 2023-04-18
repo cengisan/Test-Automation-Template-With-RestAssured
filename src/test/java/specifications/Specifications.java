@@ -6,14 +6,14 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.filter.log.LogDetail;
 import io.restassured.specification.RequestSpecification;
 import io.restassured.specification.ResponseSpecification;
-import util.properties.GetProperties;
+import util.HelperClass;
 
 import java.util.Properties;
 
 public class Specifications {
     public RequestSpecification BookerRequestSpec(){
-        GetProperties getProp = new GetProperties();
-        Properties prop = getProp.properties_reader(SpecEnum.FILEPATH.getSpecInfos());
+        HelperClass helperClass = new HelperClass();
+        Properties prop = helperClass.propertiesReader(SpecEnum.FILEPATH.getSpecInfos());
         return new RequestSpecBuilder().
                 setBaseUri(prop.getProperty(SpecEnum.BOOKERURL.getSpecInfos())).
                 log(LogDetail.ALL).
@@ -24,8 +24,8 @@ public class Specifications {
                 build();
     }
     public RequestSpecification ReqresRequestSpec(){
-        GetProperties getProp = new GetProperties();
-        Properties prop = getProp.properties_reader(SpecEnum.FILEPATH.getSpecInfos());
+        HelperClass helperClass = new HelperClass();
+        Properties prop = helperClass.propertiesReader(SpecEnum.FILEPATH.getSpecInfos());
         return new RequestSpecBuilder().
                 setBaseUri(prop.getProperty(SpecEnum.REQRESURL.getSpecInfos())).
                 log(LogDetail.ALL).

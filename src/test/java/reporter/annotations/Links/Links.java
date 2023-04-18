@@ -1,6 +1,6 @@
-package reports.annotations.Links;
+package reporter.annotations.Links;
 
-import reports.annotations.Link.Link;
+import reporter.annotations.Link.Link;
 
 import java.lang.annotation.*;
 

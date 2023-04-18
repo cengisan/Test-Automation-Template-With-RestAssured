@@ -1,4 +1,4 @@
-package reports;
+package reporter;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
@@ -164,8 +164,6 @@ public class ExtentReporterManager {
                 "            })();");
 
         ExtentReports extentReports = new ExtentReports();
-        ExtentLoggerReporter logger = new ExtentLoggerReporter("test-output");
-        extentReports.attachReporter(logger);
         extentReports.attachReporter(htmlReporter);
 
         extentReports.setSystemInfo("Automation Test Engineer", "Cengizhan Uzuner");

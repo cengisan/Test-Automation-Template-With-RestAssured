@@ -3,7 +3,7 @@ package endpoints;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import reports.ExtentReporterListener;
+import reporter.ExtentReporterListener;
 import specifications.Specifications;
 
 import java.util.HashMap;

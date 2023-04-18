@@ -1,7 +1,7 @@
-package util.database;
+package database;
 
 import enums.DatabaseEnum;
-import util.properties.GetProperties;
+import util.HelperClass;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -11,8 +11,8 @@ public class DatabaseConnection {
 
     public static Connection databaseConnection() {
         Connection connection = null;
-        GetProperties propReader = new GetProperties();
-        Properties prop = propReader.properties_reader(DatabaseEnum.FILEPATH.getDbInfo());
+        HelperClass helperClass = new HelperClass();
+        Properties prop = helperClass.propertiesReader(DatabaseEnum.FILEPATH.getDbInfo());
         try {
             Class.forName(DatabaseEnum.CLASSNAME.getDbInfo());
             connection = DriverManager
