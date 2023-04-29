@@ -11,8 +11,7 @@ public class DatabaseConnection {
 
     public static Connection databaseConnection() {
         Connection connection = null;
-        HelperClass helperClass = new HelperClass();
-        Properties prop = helperClass.propertiesReader(DatabaseEnum.FILEPATH.getDbInfo());
+        Properties prop = HelperClass.propertiesReader(DatabaseEnum.FILEPATH.getDbInfo());
         try {
             Class.forName(DatabaseEnum.CLASSNAME.getDbInfo());
             connection = DriverManager

@@ -12,8 +12,6 @@ public class HelperClass {
         try {
             FileReader fileReader = new FileReader(FilePath);
             prop.load(fileReader);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e.getMessage());
         } catch (IOException e) {
             throw new RuntimeException(e.getMessage());
         }
