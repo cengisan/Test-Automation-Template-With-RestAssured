@@ -6,6 +6,7 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import reporter.annotations.Link.Link;
 import util.TestBaseClass;
+import util.routes.BookerRoute;
 
 import java.util.HashMap;
 
@@ -18,13 +19,13 @@ public class BookerTestCases extends TestBaseClass {
     @Link(name = "AUTH", url = "https://restful-booker.herokuapp.com/apidoc/index.html")
     @Link(name = "AUTH2", url = "https://restful-booker.herokuapp.com/apidoc")
     @Test(priority = 1)
-    public void Auth_test() {
+    public void Auth_Test() {
 
         HashMap<String, String> payload = new HashMap<>();
         payload.put("username", "admin");
         payload.put("password", "password123");
 
-        Response response = bookerEndpoint.Post("auth", payload);
+        Response response = bookerEndpoint.Post(BookerRoute.AUTH, payload);
         token = response.jsonPath().get("token");
         assertions.Status200Assertion(response);
     }
@@ -32,7 +33,7 @@ public class BookerTestCases extends TestBaseClass {
     @Link(name = "GET BOOKING IDS", url = "https://restful-booker.herokuapp.com/apidoc/index.html")
     @Test(priority = 2)
     public void GetBookingIds_Test() {
-        Response response = bookerEndpoint.Get("booking");
+        Response response = bookerEndpoint.Get(BookerRoute.BOOKING);
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }
@@ -52,7 +53,7 @@ public class BookerTestCases extends TestBaseClass {
         payload.put("bookingdates", bookingdates);
         payload.put("additionalneeds", "Breakfast");
 
-        Response response = bookerEndpoint.Post("booking", payload);
+        Response response = bookerEndpoint.Post(BookerRoute.BOOKING, payload);
         bookingId = response.jsonPath().get("bookingid");
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
@@ -62,7 +63,7 @@ public class BookerTestCases extends TestBaseClass {
     @Test(priority = 4)
     public void GetBooking_Test() {
 
-        Response response = bookerEndpoint.Get("booking/" + bookingId);
+        Response response = bookerEndpoint.Get(BookerRoute.BOOKING + bookingId);
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }
@@ -82,7 +83,7 @@ public class BookerTestCases extends TestBaseClass {
         payload.put("bookingdates", bookingdates);
         payload.put("additionalneeds", "Breakfast");
 
-        Response response = bookerEndpoint.Put("booking/" + bookingId, payload, token);
+        Response response = bookerEndpoint.Put(BookerRoute.BOOKING + bookingId, payload, token);
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }
@@ -95,7 +96,7 @@ public class BookerTestCases extends TestBaseClass {
         payload.put("firstname", "James");
         payload.put("lastname", "Brown");
 
-        Response response = bookerEndpoint.Patch("booking/" + bookingId, payload, token + "2");
+        Response response = bookerEndpoint.Patch(BookerRoute.BOOKING + bookingId, payload, token + "2");
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }
@@ -104,7 +105,7 @@ public class BookerTestCases extends TestBaseClass {
     @Test(priority = 7)
     public void DeleteBooking_Test() {
 
-        Response response = bookerEndpoint.Delete("booking/" + bookingId, token);
+        Response response = bookerEndpoint.Delete(BookerRoute.BOOKING + bookingId, token);
         assertions.Status201Assertion(response);
         assertions.CreatedAssertion(response);
     }
@@ -112,7 +113,7 @@ public class BookerTestCases extends TestBaseClass {
     @Test(priority = 8)
     public void HealthCheck_Test() {
 
-        Response response = bookerEndpoint.Get("ping");
+        Response response = bookerEndpoint.Get(BookerRoute.PING);
         assertions.Status201Assertion(response);
     }
 }
