@@ -16,7 +16,7 @@ public class BookerEndpoint {
 
     public Response Post(String path, HashMap payload) {
 
-        ExtentReporterListener detail = new ExtentReporterListener();
+        ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.BookerRequestSpec())
@@ -29,12 +29,12 @@ public class BookerEndpoint {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
+        extentReporterListener.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
     public Response Get(String path) {
 
-        ExtentReporterListener detail = new ExtentReporterListener();
+        ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
         Response response = given(specifications.BookerRequestSpec())
                 .filter(new RequestLoggingFilter(captor))
@@ -45,13 +45,13 @@ public class BookerEndpoint {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
+        extentReporterListener.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
 
     public Response Put(String path, HashMap payload, String token) {
 
-        ExtentReporterListener detail = new ExtentReporterListener();
+        ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.BookerRequestSpec())
@@ -65,12 +65,12 @@ public class BookerEndpoint {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
+        extentReporterListener.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
     public Response Patch(String path, HashMap payload, String token) {
 
-        ExtentReporterListener detail = new ExtentReporterListener();
+        ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.BookerRequestSpec())
@@ -84,12 +84,12 @@ public class BookerEndpoint {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
+        extentReporterListener.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
     public Response Delete(String path,String token) {
 
-        ExtentReporterListener detail = new ExtentReporterListener();
+        ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.BookerRequestSpec())
@@ -102,7 +102,7 @@ public class BookerEndpoint {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
+        extentReporterListener.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
 }

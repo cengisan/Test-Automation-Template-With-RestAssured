@@ -12,8 +12,7 @@ import java.util.Properties;
 
 public class Specifications {
     public RequestSpecification BookerRequestSpec(){
-        HelperClass helperClass = new HelperClass();
-        Properties prop = helperClass.propertiesReader(SpecEnum.FILEPATH.getSpecInfos());
+        Properties prop = HelperClass.propertiesReader(SpecEnum.FILEPATH.getSpecInfos());
         return new RequestSpecBuilder().
                 setBaseUri(prop.getProperty(SpecEnum.BOOKERURL.getSpecInfos())).
                 log(LogDetail.ALL).
@@ -24,8 +23,7 @@ public class Specifications {
                 build();
     }
     public RequestSpecification ReqresRequestSpec(){
-        HelperClass helperClass = new HelperClass();
-        Properties prop = helperClass.propertiesReader(SpecEnum.FILEPATH.getSpecInfos());
+        Properties prop = HelperClass.propertiesReader(SpecEnum.FILEPATH.getSpecInfos());
         return new RequestSpecBuilder().
                 setBaseUri(prop.getProperty(SpecEnum.REQRESURL.getSpecInfos())).
                 log(LogDetail.ALL).

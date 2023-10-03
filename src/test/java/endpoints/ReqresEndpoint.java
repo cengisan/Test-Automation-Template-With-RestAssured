@@ -16,7 +16,7 @@ public class ReqresEndpoint {
 
     public Response Post(String path, HashMap payload) {
 
-        ExtentReporterListener detail = new ExtentReporterListener();
+        ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
@@ -29,12 +29,12 @@ public class ReqresEndpoint {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
+        extentReporterListener.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
     public Response Get(String path) {
 
-        ExtentReporterListener detail = new ExtentReporterListener();
+        ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
@@ -46,7 +46,7 @@ public class ReqresEndpoint {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
+        extentReporterListener.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
 
@@ -71,7 +71,7 @@ public class ReqresEndpoint {
 
     public Response Put(String path, HashMap payload) {
 
-        ExtentReporterListener detail = new ExtentReporterListener();
+        ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
@@ -83,12 +83,12 @@ public class ReqresEndpoint {
                 .then().spec(specifications.ReqresResponseSpec())
                 .extract()
                 .response();
-        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
+        extentReporterListener.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
     public Response Patch(String path, HashMap payload) {
 
-        ExtentReporterListener detail = new ExtentReporterListener();
+        ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
@@ -101,12 +101,12 @@ public class ReqresEndpoint {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
+        extentReporterListener.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
     public Response Delete(String path) {
 
-        ExtentReporterListener detail = new ExtentReporterListener();
+        ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
 
         Response response = given(specifications.ReqresRequestSpec())
@@ -118,7 +118,7 @@ public class ReqresEndpoint {
                 .extract()
                 .response();
 
-        detail.requestAndResponseReporter(writer.toString(), response.prettyPrint());
+        extentReporterListener.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
 
