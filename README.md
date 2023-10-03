@@ -17,7 +17,8 @@ Reporting: Extent Reporter
 ## Screenshots
 **Test Automation Running with Rest Assured**
 
-![image](https://github.com/cengisan/RestAssured-Template/assets/77883086/f542dde8-0404-4df9-85e4-54aeabc7ca4e)
+![image](https://github.com/cengisan/RestAssured-Template/assets/77883086/f597c4f5-cc58-4a0a-9854-de744aa0d1bb)
+
 
 **Reporting with Extent Reporter**
 
@@ -50,7 +51,8 @@ https://reqres.in/
 
 **Rest Assured ile Test Otomasyon Koşumu**
 
-![image](https://github.com/cengisan/RestAssured-Template/assets/77883086/f542dde8-0404-4df9-85e4-54aeabc7ca4e)
+![image](https://github.com/cengisan/RestAssured-Template/assets/77883086/4f096e65-9b6f-42b9-a4cc-026fc738af98)
+
 
 **Extent Reporter İle Raporlama**
 
