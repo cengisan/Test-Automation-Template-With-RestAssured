@@ -1,5 +1,5 @@
 # Test Automation Project Template with Rest Assured
-In this project, I created an API test automation template with Rest Assured. In this template, I used dummy APIs in test case writing. I used TestNG framework for test execution. I used Extent Reporter in reporting, but in addition to reporting, I wrote a custom annotation to add task links to the report. Thus, I made it possible to add links related to tests to the report. If you organize this template according to your projects, you can automate your test cases.
+I used Rest Assured to build an API test automation template for this project. I wrote the test cases for this template using dummy APIs. For the test execution, I used the TestNG framework. In addition to reporting using Extent Reporter, I also created a custom annotation to include task links in the report. As a result, I enabled the addition of test-related links to the report. You can automate your test cases if you arrange this template in accordance with your projects.
 
 Dummy API sites;
 
