@@ -9,7 +9,6 @@ import reporter.annotations.Link.Link;
 import util.TestBaseClass;
 import util.routes.ReqresRoute;
 
-import java.util.HashMap;
 
 public class ReqresTestCases extends TestBaseClass {
     Assertions assertions = new Assertions();

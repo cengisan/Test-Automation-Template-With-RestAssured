@@ -6,7 +6,6 @@ import io.restassured.response.Response;
 import reporter.ExtentReporterListener;
 import specifications.Specifications;
 
-import java.util.HashMap;
 
 import static io.restassured.RestAssured.given;
 import static util.TestBaseClass.captor;
