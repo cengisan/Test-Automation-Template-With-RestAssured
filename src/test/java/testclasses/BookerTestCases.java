@@ -1,7 +1,7 @@
 package testclasses;
 
 import assertion.Assertions;
-import dto.bookerApiRequests.AuthReqeust;
+import dto.bookerApiRequests.AuthRequest;
 import dto.bookerApiRequests.CreatingBookingRequest;
 import dto.bookerApiRequests.PartialUpdateBookingRequest;
 import endpoints.BookerEndpoint;
@@ -22,11 +22,11 @@ public class BookerTestCases extends TestBaseClass {
     @Test(priority = 1)
     public void Auth_Test() {
 
-        AuthReqeust authReqeust = new AuthReqeust();
-        authReqeust.setUsername("admin");
-        authReqeust.setPassword("password123");
+        AuthRequest authRequest = new AuthRequest();
+        authRequest.setUsername("admin");
+        authRequest.setPassword("password123");
 
-        Response response = bookerEndpoint.Post(BookerRoute.AUTH, authReqeust);
+        Response response = bookerEndpoint.Post(BookerRoute.AUTH, authRequest);
         token = response.jsonPath().get("token");
         assertions.Status200Assertion(response);
     }
