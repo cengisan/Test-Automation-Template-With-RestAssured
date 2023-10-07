@@ -1,14 +1,15 @@
 package testclasses;
 
 import assertion.Assertions;
+import dto.bookerApiRequests.AuthReqeust;
+import dto.bookerApiRequests.CreatingBookingRequest;
+import dto.bookerApiRequests.PartialUpdateBookingRequest;
 import endpoints.BookerEndpoint;
 import io.restassured.response.Response;
 import org.testng.annotations.Test;
 import reporter.annotations.Link.Link;
 import util.TestBaseClass;
 import util.routes.BookerRoute;
-
-import java.util.HashMap;
 
 public class BookerTestCases extends TestBaseClass {
     Assertions assertions = new Assertions();
@@ -21,11 +22,11 @@ public class BookerTestCases extends TestBaseClass {
     @Test(priority = 1)
     public void Auth_Test() {
 
-        HashMap<String, String> payload = new HashMap<>();
-        payload.put("username", "admin");
-        payload.put("password", "password123");
+        AuthReqeust authReqeust = new AuthReqeust();
+        authReqeust.setUsername("admin");
+        authReqeust.setPassword("password123");
 
-        Response response = bookerEndpoint.Post(BookerRoute.AUTH, payload);
+        Response response = bookerEndpoint.Post(BookerRoute.AUTH, authReqeust);
         token = response.jsonPath().get("token");
         assertions.Status200Assertion(response);
     }
@@ -41,19 +42,21 @@ public class BookerTestCases extends TestBaseClass {
     @Link(name = "CREATE BOOKING", url = "https://restful-booker.herokuapp.com/apidoc/index.html")
     @Test(priority = 3)
     public void CreateBooking_Test() {
-        HashMap<String, String> bookingdates = new HashMap<>();
-        bookingdates.put("checkin", "2018-01-01");
-        bookingdates.put("checkout", "2019-01-01");
 
-        HashMap<String, Object> payload = new HashMap<>();
-        payload.put("firstname", "Jim");
-        payload.put("lastname", "Brown");
-        payload.put("totalprice", 111);
-        payload.put("depositpaid", true);
-        payload.put("bookingdates", bookingdates);
-        payload.put("additionalneeds", "Breakfast");
+        CreatingBookingRequest creatingBookingRequest = new CreatingBookingRequest();
+        creatingBookingRequest.setFirstname("Jim");
+        creatingBookingRequest.setLastname("Brown");
+        creatingBookingRequest.setTotalprice(111);
+        creatingBookingRequest.setDepositpaid(true);
+        creatingBookingRequest.setAdditionalneeds("Breakfast");
 
-        Response response = bookerEndpoint.Post(BookerRoute.BOOKING, payload);
+        CreatingBookingRequest.Bookingdates bookingdates = new CreatingBookingRequest.Bookingdates();
+        bookingdates.setCheckin("2018-01-01");
+        bookingdates.setCheckout("2019-01-01");
+
+        creatingBookingRequest.setBookingdates(bookingdates);
+
+        Response response = bookerEndpoint.Post(BookerRoute.BOOKING, creatingBookingRequest);
         bookingId = response.jsonPath().get("bookingid");
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
@@ -71,19 +74,22 @@ public class BookerTestCases extends TestBaseClass {
     @Link(name = "UPDATE BOOKING", url = "https://restful-booker.herokuapp.com/apidoc/index.html")
     @Test(priority = 5)
     public void UpdateBooking_Test() {
-        HashMap<String, String> bookingdates = new HashMap<>();
-        bookingdates.put("checkin", "2018-01-01");
-        bookingdates.put("checkout", "2019-01-01");
 
-        HashMap<String, Object> payload = new HashMap<>();
-        payload.put("firstname", "James");
-        payload.put("lastname", "Green");
-        payload.put("totalprice", 111);
-        payload.put("depositpaid", true);
-        payload.put("bookingdates", bookingdates);
-        payload.put("additionalneeds", "Breakfast");
+        CreatingBookingRequest UpdateBookingRequest = new CreatingBookingRequest();
+        UpdateBookingRequest.setFirstname("James");
+        UpdateBookingRequest.setLastname("Green");
+        UpdateBookingRequest.setTotalprice(111);
+        UpdateBookingRequest.setDepositpaid(true);
+        UpdateBookingRequest.setAdditionalneeds("Lunch");
 
-        Response response = bookerEndpoint.Put(BookerRoute.BOOKING + bookingId, payload, token);
+        CreatingBookingRequest.Bookingdates bookingdates = new CreatingBookingRequest.Bookingdates();
+        bookingdates.setCheckin("2018-01-01");
+        bookingdates.setCheckout("2019-01-01");
+
+        UpdateBookingRequest.setBookingdates(bookingdates);
+
+
+        Response response = bookerEndpoint.Put(BookerRoute.BOOKING + bookingId, UpdateBookingRequest, token);
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }
@@ -92,11 +98,11 @@ public class BookerTestCases extends TestBaseClass {
     @Test(priority = 6)
     public void PartialUpdateBooking_Test() {
 
-        HashMap<String, Object> payload = new HashMap<>();
-        payload.put("firstname", "James");
-        payload.put("lastname", "Brown");
+        PartialUpdateBookingRequest partialUpdateBookingRequest = new PartialUpdateBookingRequest();
+        partialUpdateBookingRequest.setFirstname("James");
+        partialUpdateBookingRequest.setLastname("Green");
 
-        Response response = bookerEndpoint.Patch(BookerRoute.BOOKING + bookingId, payload, token + "2");
+        Response response = bookerEndpoint.Patch(BookerRoute.BOOKING + bookingId, partialUpdateBookingRequest, token );
         assertions.Status200Assertion(response);
         assertions.NotNullAssertion(response);
     }

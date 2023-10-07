@@ -7,6 +7,7 @@ import reporter.ExtentReporterListener;
 import specifications.Specifications;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 import static io.restassured.RestAssured.given;
 import static util.TestBaseClass.captor;
@@ -14,7 +15,7 @@ import static util.TestBaseClass.writer;
 
 public class BookerEndpoint {
 
-    public Response Post(String path, HashMap payload) {
+    public Response Post(String path, Object payload) {
 
         ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
@@ -49,7 +50,7 @@ public class BookerEndpoint {
         return response;
     }
 
-    public Response Put(String path, HashMap payload, String token) {
+    public Response Put(String path, Object payload, String token) {
 
         ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
@@ -68,7 +69,7 @@ public class BookerEndpoint {
         extentReporterListener.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
-    public Response Patch(String path, HashMap payload, String token) {
+    public Response Patch(String path, Object payload, String token) {
 
         ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();

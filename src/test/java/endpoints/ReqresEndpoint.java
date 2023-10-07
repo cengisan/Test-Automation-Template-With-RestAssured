@@ -14,7 +14,7 @@ import static util.TestBaseClass.writer;
 
 public class ReqresEndpoint {
 
-    public Response Post(String path, HashMap payload) {
+    public Response Post(String path, Object payload) {
 
         ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
@@ -69,7 +69,7 @@ public class ReqresEndpoint {
         return response;
     }
 
-    public Response Put(String path, HashMap payload) {
+    public Response Put(String path, Object payload) {
 
         ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
@@ -86,7 +86,7 @@ public class ReqresEndpoint {
         extentReporterListener.requestAndResponseReporter(writer.toString(), response.prettyPrint());
         return response;
     }
-    public Response Patch(String path, HashMap payload) {
+    public Response Patch(String path, Object payload) {
 
         ExtentReporterListener extentReporterListener = new ExtentReporterListener();
         Specifications specifications = new Specifications();
